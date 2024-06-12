@@ -1,0 +1,37 @@
+{
+    "schema": {
+        "structures": [
+            {
+                "name": "ALIEN_ALIEN",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ALIEN_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 200,
+                        "precision": "NaN",
+                        "scale": "NaN",
+                        "nullable": true,
+                        "name": "ALIEN_NAME"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 200,
+                        "precision": "NaN",
+                        "scale": "NaN",
+                        "nullable": true,
+                        "name": "ALIEN_PLANET"
+                    }
+                ]
+            }
+        ]
+    },
+    "datasource": "DefaultDB"
+}

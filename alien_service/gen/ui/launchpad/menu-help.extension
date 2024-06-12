@@ -1,0 +1,5 @@
+{
+    "module": "alien_service/gen/ui/launchpad/menu-help.js",
+    "extensionPoint": "alien_service-menu",
+    "description": "alien_service - Application Menu"
+}

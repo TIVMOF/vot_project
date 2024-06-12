@@ -1,0 +1,5 @@
+{
+    "module": "alien_service/gen/ui/launchpad/Home/view.js",
+    "extensionPoint": "alien_service-view",
+    "description": "alien_service - Application View"
+}
