@@ -1,0 +1,6 @@
+FROM dirigiblelabs/dirigible:latest
+
+COPY alien_service/gen/ui target/dirigible/repository/root/registry/public/alien_service/gen/ui
+COPY alien_service/gen/alien.openapi target/dirigible/repository/root/registry/public/alien_service/gen/index.html
+
+ENV DIRIGIBLE_HOME_URL=/services/web/alien_service/gen/index.html
