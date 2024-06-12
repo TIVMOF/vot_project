@@ -5,25 +5,91 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_1
-    container_name: alien_service_backend
+    container_name: dirigible_service1
+    networks:
+      - dirigible_network
+    ports:
+      - "8081:8080"  # Map host port 8081 to container port 8080
+    environment:
+      - KEYCLOAK_URL=http://keycloak:8080/auth  # URL to access Keycloak
+      - SERVICE_NAME=service1  # Name of your service as registered in Keycloak
 
   service2:
     build:
       context: .
       dockerfile: Dockerfile_2
-    container_name: alien_service_frontend
+    container_name: dirigible_service2
+    networks:
+      - dirigible_network
+    ports:
+      - "8082:8080"  # Map host port 8082 to container port 8080
     environment:
-      - DIRIGIBLE_HOME_URL=/services/web/alien_service/gen/index.html
+      - KEYCLOAK_URL=http://keycloak:8080/auth  # URL to access Keycloak
+      - SERVICE_NAME=service2  # Name of your service as registered in Keycloak
 
   service3:
     build:
       context: .
       dockerfile: Dockerfile_3
-    container_name: alien_service
+    container_name: dirigible_service3
+    networks:
+      - dirigible_network
+    ports:
+      - "8083:8080"  # Map host port 8083 to container port 8080
     environment:
+      - KEYCLOAK_URL=http://keycloak:8080/auth  # URL to access Keycloak
+      - SERVICE_NAME=service3  # Name of your service as registered in Keycloak
       - DIRIGIBLE_HOME_URL=/services/web/alien_service/gen/index.html
 
+  mariadb1:
+    image: mariadb:10.5
+    container_name: mariadb1
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password1
+      MYSQL_DATABASE: database1
+    networks:
+      - mariadb_network
+
+  mariadb2:
+    image: mariadb:10.5
+    container_name: mariadb2
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password2
+      MYSQL_DATABASE: database2
+    networks:
+      - mariadb_network
+
+  proxysql:
+    image: proxysql/proxysql:latest
+    container_name: proxysql
+    volumes:
+      - ./proxysql.cnf:/etc/proxysql.cnf
+    ports:
+      - "6033:6033"
+      - "6032:6032"
+      - "6035:6035"  # ProxySQL admin interface port
+    depends_on:
+      - mariadb1
+      - mariadb2
+      - keycloak
+    networks:
+      - dirigible_network
+      - mariadb_network
+
+  keycloak:
+    image: quay.io/keycloak:latest
+    container_name: keycloak
+    environment:
+      - KEYCLOAK_USER=admin  # Admin username for Keycloak
+      - KEYCLOAK_PASSWORD=admin_password  # Admin password for Keycloak
+      - DB_VENDOR=h2  # Use H2 in-memory database for Keycloak (for demo purposes, replace with a proper database for production)
+    ports:
+      - "8080:8080"  # Map host port 8080 to Keycloak container port 8080
+    networks:
+      - dirigible_network
+
 networks:
-  default:
-    external:
-      name: dirigible_network
+  dirigible_network:
+    driver: bridge
+  mariadb_network:
+    driver: bridge

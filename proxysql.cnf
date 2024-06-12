@@ -1,0 +1,46 @@
+# proxysql.cnf
+
+admin_variables=
+{
+    admin_credentials="admin:admin"
+    mysql_ifaces="0.0.0.0:6032;/path/to/proxysql-admin.sock"
+    refresh_interval=2000
+    debug=false
+}
+
+mysql_variables=
+{
+    threads=4
+    max_connections=2048
+    default_query_delay=0
+    default_query_timeout=36000000
+    have_compress=true
+    poll_timeout=2000
+    interfaces="0.0.0.0:6033;/path/to/proxysql.sock"
+    default_schema="information_schema"
+    stacksize=1048576
+}
+
+mysql_servers =
+(
+    { address="mariadb1", port=3306, hostgroup=10 },
+    { address="mariadb2", port=3306, hostgroup=20 },
+)
+
+mysql_users =
+(
+    { username="database1", password="root_password1", default_hostgroup=10, active=1 },
+    { username="database2", password="root_password2", default_hostgroup=20, active=1 },
+)
+
+mysql_query_rules =
+(
+    { rule_id=1, active=1, match_pattern="^SELECT .* FOR UPDATE$", destination_hostgroup=10, apply=1 },
+    { rule_id=2, active=1, match_pattern="^SELECT", destination_hostgroup=20, apply=1 },
+)
+
+# LDAP configuration for authentication against Keycloak
+mysql_user_roles =
+(
+    { username="keycloak_user", default_hostgroup=10, active=1, frontend="service1", backend="ldap", match_digest=".*" },
+    { username="keycloak_user", default_hostgroup=20, active=1, frontend="service2", backend="ldap", match_digest=".*"
