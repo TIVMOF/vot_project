@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  service1:
+    build:
+      context: .
+      dockerfile: Dockerfile_1
+    container_name: alien_service_backend
+
+  service2:
+    build:
+      context: .
+      dockerfile: Dockerfile_2
+    container_name: alien_service_frontend
+    environment:
+      - DIRIGIBLE_HOME_URL=/services/web/alien_service/gen/index.html
+
+  service3:
+    build:
+      context: .
+      dockerfile: Dockerfile_3
+    container_name: alien_service
+    environment:
+      - DIRIGIBLE_HOME_URL=/services/web/alien_service/gen/index.html
+
+networks:
+  default:
+    external:
+      name: dirigible_network
