@@ -78,12 +78,26 @@ services:
     depends_on:
       - db1
       - db2
+      - keycloak
     networks:
       - dirigible_network
     ports:
       - "3308:3306"
+      - "8080:8080"  # Add a port for Keycloak access
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: dirigible_keycloak
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - DB_VENDOR=h2
+    networks:
+      - dirigible_network
+    ports:
+      - "8090:8080"  # Expose Keycloak on port 8090
 
 networks:
   dirigible_network:
