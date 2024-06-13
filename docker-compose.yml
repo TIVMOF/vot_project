@@ -11,7 +11,6 @@ services:
     ports:
       - "8081:8080"  # Map host port 8081 to container port 8080
     environment:
-      - KEYCLOAK_URL=http://keycloak:8080/auth  # URL to access Keycloak
       - SERVICE_NAME=service1  # Name of your service as registered in Keycloak
 
   service2:
@@ -24,7 +23,6 @@ services:
     ports:
       - "8082:8080"  # Map host port 8082 to container port 8080
     environment:
-      - KEYCLOAK_URL=http://keycloak:8080/auth  # URL to access Keycloak
       - SERVICE_NAME=service2  # Name of your service as registered in Keycloak
 
   service3:
@@ -37,56 +35,60 @@ services:
     ports:
       - "8083:8080"  # Map host port 8083 to container port 8080
     environment:
-      - KEYCLOAK_URL=http://keycloak:8080/auth  # URL to access Keycloak
       - SERVICE_NAME=service3  # Name of your service as registered in Keycloak
       - DIRIGIBLE_HOME_URL=/services/web/alien_service/gen/index.html
 
-  mariadb1:
+  db1:
     image: mariadb:10.5
-    container_name: mariadb1
+    container_name: dirigible_db1
     environment:
-      MYSQL_ROOT_PASSWORD: root_password1
-      MYSQL_DATABASE: database1
-    networks:
-      - dirigible_network
-
-  mariadb2:
-    image: mariadb:10.5
-    container_name: mariadb2
-    environment:
-      MYSQL_ROOT_PASSWORD: root_password2
-      MYSQL_DATABASE: database2
-    networks:
-      - dirigible_network
-
-  proxysql:
-    image: proxysql/proxysql:latest
-    container_name: proxysql
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=dirigibledb
+      - CLUSTER_NAME=dirigible_cluster
+      - XTRABACKUP_PASSWORD=xtrabackup
     volumes:
-      - ./proxysql.cnf:/etc/proxysql.cnf
-    ports:
-      - "6033:6033"
-      - "6032:6032"
-      - "6035:6035"  # ProxySQL admin interface port
-    depends_on:
-      - mariadb1
-      - mariadb2
-      - keycloak
+      - db1_data:/var/lib/mysql
     networks:
       - dirigible_network
+    ports:
+      - "3306:3306"
+    command: --wsrep-new-cluster
 
-  keycloak:
-    image: quay.io/keycloak/keycloak:latest
-    container_name: keycloak
+  db2:
+    image: mariadb:10.5
+    container_name: dirigible_db2
     environment:
-      - KEYCLOAK_USER=admin  # Admin username for Keycloak
-      - KEYCLOAK_PASSWORD=admin_password  # Admin password for Keycloak
-      - DB_VENDOR=h2  # Use H2 in-memory database for Keycloak (for demo purposes, replace with a proper database for production)
-    ports:
-      - "8080:8080"  # Map host port 8080 to Keycloak container port 8080
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=dirigibledb
+      - CLUSTER_NAME=dirigible_cluster
+      - XTRABACKUP_PASSWORD=xtrabackup
+    volumes:
+      - db2_data:/var/lib/mysql
     networks:
       - dirigible_network
+    ports:
+      - "3307:3306"
+    depends_on:
+      - db1
+    command: --wsrep_cluster_address=gcomm://dirigible_db1
+
+  haproxy:
+    image: haproxy:latest
+    container_name: dirigible_haproxy
+    depends_on:
+      - db1
+      - db2
+    networks:
+      - dirigible_network
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
 
 networks:
   dirigible_network:
     driver: bridge
+
+volumes:
+  db1_data:
+  db2_data:
