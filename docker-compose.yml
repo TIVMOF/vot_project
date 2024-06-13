@@ -48,7 +48,7 @@ services:
       MYSQL_ROOT_PASSWORD: root_password1
       MYSQL_DATABASE: database1
     networks:
-      - mariadb_network
+      - dirigible_network
 
   mariadb2:
     image: mariadb:10.5
@@ -57,7 +57,7 @@ services:
       MYSQL_ROOT_PASSWORD: root_password2
       MYSQL_DATABASE: database2
     networks:
-      - mariadb_network
+      - dirigible_network
 
   proxysql:
     image: proxysql/proxysql:latest
@@ -74,10 +74,9 @@ services:
       - keycloak
     networks:
       - dirigible_network
-      - mariadb_network
 
   keycloak:
-    image: quay.io/keycloak:latest
+    image: quay.io/keycloak/keycloak:latest
     container_name: keycloak
     environment:
       - KEYCLOAK_USER=admin  # Admin username for Keycloak
@@ -90,6 +89,4 @@ services:
 
 networks:
   dirigible_network:
-    driver: bridge
-  mariadb_network:
     driver: bridge
