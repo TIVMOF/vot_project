@@ -7,7 +7,7 @@ const viewData = {
     id: "Alien",
     label: "Alien",
     factory: "frame",
-    region: "center",
+    region: "left",
     link: "/services/web/alien_service/gen/ui/entities/Alien/index.html",
     perspectiveName: "entities",
 };

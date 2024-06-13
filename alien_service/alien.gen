@@ -1,7 +1,7 @@
 {
   "tablePrefix": "ALIEN_",
-  "brand": "TIVMOF",
-  "brandUrl": "tivmof.com",
+  "brand": "tivmof",
+  "brandUrl": "https://www.codbex.com/",
   "title": "Alien Service",
   "description": "Managing alien data",
   "projectName": "alien_service",
@@ -13,7 +13,26 @@
   "perspectives": {
     "entities": {
       "views": [
-        "Alien"
+        "Alien",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details",
+        "Alien-details"
       ],
       "name": "entities",
       "label": "entities",
@@ -110,9 +129,11 @@
       "dataCount": "SELECT COUNT(*) AS COUNT FROM \"ALIEN_ALIEN\"",
       "dataName": "ALIEN",
       "dataQuery": "",
+      "feedPassword": "YWRtaW4=",
+      "feedUsername": "YWRtaW4=",
       "generateReport": "false",
       "icon": "/services/web/resources/unicons/file.svg",
-      "layoutType": "MANAGE",
+      "layoutType": "MANAGE_MASTER",
       "menuIndex": "100",
       "menuKey": "alien",
       "menuLabel": "Alien",
@@ -131,7 +152,67 @@
       "primaryKeys": [
         "Id"
       ],
-      "primaryKeysString": "Id"
+      "primaryKeysString": "Id",
+      "masterProperties": {
+        "title": {
+          "calculatedPropertyExpressionCreate": "",
+          "calculatedPropertyExpressionUpdate": "",
+          "dataAutoIncrement": false,
+          "dataLength": "200",
+          "dataName": "ALIEN_NAME",
+          "dataNullable": true,
+          "dataPrecision": "NaN",
+          "dataPrimaryKey": false,
+          "dataScale": "NaN",
+          "dataType": "VARCHAR",
+          "dataUnique": false,
+          "isCalculatedProperty": false,
+          "isRequiredProperty": false,
+          "name": "Name",
+          "widgetIsMajor": true,
+          "widgetLength": "200",
+          "widgetSize": "",
+          "widgetType": "TEXTBOX",
+          "dataNotNull": false,
+          "widgetLabel": "Name",
+          "widgetDropdownUrl": "",
+          "dataTypeJava": "string",
+          "dataTypeTypescript": "string",
+          "minLength": 0,
+          "maxLength": 200,
+          "inputRule": ""
+        },
+        "properties": [
+          {
+            "calculatedPropertyExpressionCreate": "",
+            "calculatedPropertyExpressionUpdate": "",
+            "dataAutoIncrement": false,
+            "dataLength": "200",
+            "dataName": "ALIEN_PLANET",
+            "dataNullable": true,
+            "dataPrecision": "NaN",
+            "dataPrimaryKey": false,
+            "dataScale": "NaN",
+            "dataType": "VARCHAR",
+            "dataUnique": false,
+            "isCalculatedProperty": false,
+            "isRequiredProperty": false,
+            "name": "Planet",
+            "widgetIsMajor": true,
+            "widgetLength": "200",
+            "widgetSize": "",
+            "widgetType": "TEXTBOX",
+            "dataNotNull": false,
+            "widgetLabel": "Planet",
+            "widgetDropdownUrl": "",
+            "dataTypeJava": "string",
+            "dataTypeTypescript": "string",
+            "minLength": 0,
+            "maxLength": 200,
+            "inputRule": ""
+          }
+        ]
+      }
     }
   ]
 }

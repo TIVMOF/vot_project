@@ -6,12 +6,14 @@
 const viewData = {
     id: "Alien-details",
     label: "Alien",
-    link: "/services/web/alien_service/gen/ui/entities/Alien/dialog-window/index.html",
+    factory: "frame",
+    region: "center",
+    link: "/services/web/alien_service/gen/ui/entities/Alien/main-details/index.html",
     perspectiveName: "entities",
 };
 
 if (typeof exports !== 'undefined') {
-    exports.getDialogWindow = function () {
+    exports.getView = function () {
         return viewData;
     }
 }
