@@ -10,4 +10,4 @@ COPY alien_service/callback.html target/dirigible/repository/root/registry/publi
 COPY alien_service/login.mjs target/dirigible/repository/root/registry/public/alien_service/login.mjs
 COPY alien_service/callback.mjs target/dirigible/repository/root/registry/public/alien_service/callback.mjs
 
-ENV DIRIGIBLE_HOME_URL=/services/web/alien_service/gen/alien.openapi
+ENV DIRIGIBLE_HOME_URL=/services/web/ide-swagger/ui/
