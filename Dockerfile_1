@@ -5,3 +5,9 @@ COPY alien_service/gen/dao target/dirigible/repository/root/registry/public/alie
 COPY alien_service/gen/odata target/dirigible/repository/root/registry/public/alien_service/gen/odata
 COPY alien_service/gen/schema target/dirigible/repository/root/registry/public/alien_service/gen/schema
 COPY alien_service/gen/alien.openapi target/dirigible/repository/root/registry/public/alien_service/gen/alien.openapi
+COPY alien_service/login.html target/dirigible/repository/root/registry/public/alien_service/login.html
+COPY alien_service/callback.html target/dirigible/repository/root/registry/public/alien_service/callback.html
+COPY alien_service/login.mjs target/dirigible/repository/root/registry/public/alien_service/login.mjs
+COPY alien_service/callback.mjs target/dirigible/repository/root/registry/public/alien_service/callback.mjs
+
+ENV DIRIGIBLE_HOME_URL=/services/web/alien_service/login.html
