@@ -1,97 +1,97 @@
 {
-    "realm": "myrealm",
-    "clients": [
-      {
-        "clientId": "frontend-client",
-        "enabled": true,
-        "clientAuthenticatorType": "client-secret",
-        "secret": "your-frontend-client-secret",
-        "redirectUris": [
-          "http://localhost:8081/*"
-        ],
-        "webOrigins": [
-          "http://localhost:8081"
-        ],
-        "protocol": "openid-connect",
-        "standardFlowEnabled": true,
-        "implicitFlowEnabled": false,
-        "directAccessGrantsEnabled": false,
-        "serviceAccountsEnabled": false,
-        "publicClient": true
-      },
-      {
-        "clientId": "backend-client",
-        "enabled": true,
-        "clientAuthenticatorType": "client-secret",
-        "secret": "your-backend-client-secret",
-        "redirectUris": [
-          "http://localhost:8082/*"
-        ],
-        "webOrigins": [
-          "http://localhost:8082"
-        ],
-        "protocol": "openid-connect",
-        "standardFlowEnabled": true,
-        "implicitFlowEnabled": false,
-        "directAccessGrantsEnabled": false,
-        "serviceAccountsEnabled": false,
-        "publicClient": true
-      },
-      {
-        "clientId": "fullstack-client",
-        "enabled": true,
-        "clientAuthenticatorType": "client-secret",
-        "secret": "your-fullstack-client-secret",
-        "redirectUris": [
-          "http://localhost:8083/*"
-        ],
-        "webOrigins": [
-          "http://localhost:8083"
-        ],
-        "protocol": "openid-connect",
-        "standardFlowEnabled": true,
-        "implicitFlowEnabled": false,
-        "directAccessGrantsEnabled": false,
-        "serviceAccountsEnabled": false,
-        "publicClient": true
-      }
-    ],
-    "roles": [
-      {
-        "name": "user",
-        "description": "Regular user role"
-      },
-      {
-        "name": "admin",
-        "description": "Administrator role"
-      }
-    ],
-    "users": [
-      {
-        "username": "user1",
-        "enabled": true,
-        "credentials": [
-          {
-            "type": "password",
-            "value": "password1"
-          }
-        ],
-        "roles": {
-          "realm": ["user"]
+  "realm": "myrealm",
+  "clients": [
+    {
+      "clientId": "frontend-client",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "your-frontend-client-secret",
+      "redirectUris": [
+        "http://localhost:8081/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8081"
+      ],
+      "protocol": "openid-connect",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "publicClient": true
+    },
+    {
+      "clientId": "backend-client",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "your-backend-client-secret",
+      "redirectUris": [
+        "http://localhost:8082/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8082"
+      ],
+      "protocol": "openid-connect",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "publicClient": true
+    },
+    {
+      "clientId": "fullstack-client",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "your-fullstack-client-secret",
+      "redirectUris": [
+        "http://localhost:8083/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8083"
+      ],
+      "protocol": "openid-connect",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "publicClient": true
+    }
+  ],
+  "roles": [
+    {
+      "name": "user",
+      "description": "Regular user role"
+    },
+    {
+      "name": "admin",
+      "description": "Administrator role"
+    }
+  ],
+  "users": [
+    {
+      "username": "user1",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password1"
         }
-      },
-      {
-        "username": "admin1",
-        "enabled": true,
-        "credentials": [
-          {
-            "type": "password",
-            "value": "adminpassword1"
-          }
-        ],
-        "roles": {
-          "realm": ["admin"]
-        }
+      ],
+      "roles": {
+        "realm": ["user"]
       }
-    ]
-  }
+    },
+    {
+      "username": "admin1",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "adminpassword1"
+        }
+      ],
+      "roles": {
+        "realm": ["admin"]
+      }
+    }
+  ]
+}

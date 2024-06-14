@@ -42,7 +42,6 @@ services:
       - keycloak
     environment:
       - SERVICE_NAME=service3
-      - DIRIGIBLE_HOME_URL=/services/web/alien_service/gen/index.html
 
   db1:
     image: mariadb:10.5
@@ -76,7 +75,7 @@ services:
       - "3307:3306"
     depends_on:
       - db1
-    command: --wsrep_cluster_address=gcomm://dirigible_db1
+    command: --wsrep_cluster_address=gcomm://db1
 
   haproxy:
     image: haproxy:latest

@@ -1,9 +1,3 @@
 FROM dirigiblelabs/dirigible:latest
 
 COPY alien_service target/dirigible/repository/root/registry/public/alien_service
-COPY alien_service/login.html target/dirigible/repository/root/registry/public/alien_service/login.html
-COPY alien_service/callback.html target/dirigible/repository/root/registry/public/alien_service/callback.html
-COPY alien_service/login.mjs target/dirigible/repository/root/registry/public/alien_service/login.mjs
-COPY alien_service/callback.mjs target/dirigible/repository/root/registry/public/alien_service/callback.mjs
-
-ENV DIRIGIBLE_HOME_URL=/services/web/alien_service/login.html
