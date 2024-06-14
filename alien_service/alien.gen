@@ -1,7 +1,7 @@
 {
   "tablePrefix": "ALIEN_",
   "brand": "tivmof",
-  "brandUrl": "https://www.codbex.com/",
+  "brandUrl": "codbex.co ",
   "title": "Alien Service",
   "description": "Managing alien data",
   "projectName": "alien_service",
